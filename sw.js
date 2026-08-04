@@ -1,0 +1,94 @@
+const CACHE_NAME = 'wedding-invitation-v18';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './manifest.json',
+  './css/styles.css',
+  './js/config.js',
+  './js/countdown.js',
+  './js/particles.js',
+  './js/app.js',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/images/couple-cover.jpg',
+  './assets/images/groom.jpg',
+  './assets/images/bride.jpg',
+  './assets/images/gallery-1.jpg',
+  './assets/images/gallery-2.jpg',
+  './assets/images/gallery-3.jpg',
+  './assets/images/gallery-4.jpg'
+];
+
+// Install Event - Pre-cache core assets
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('[SW] Pre-caching static assets');
+      // Resilient: one failing asset must not abort the whole install
+      // (addAll() throws on 206/partial responses for range-capable files).
+      return Promise.all(
+        ASSETS_TO_CACHE.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('[SW] Skipped caching', url, err);
+          })
+        )
+      );
+    }).then(() => {
+      // Pre-cache the ambient audio as a full 200 response (separate from
+      // ASSETS_TO_CACHE so a range/206 hiccup can never fail the install).
+      return caches.open(CACHE_NAME).then((cache) =>
+        fetch('./assets/audio/wedding-ambient.mp3').then((res) => {
+          if (res && res.status === 200 && res.type === 'basic') {
+            return cache.put('./assets/audio/wedding-ambient.mp3', res);
+          }
+        }).catch((err) => {
+          console.warn('[SW] Audio pre-cache skipped', err);
+        })
+      );
+    }).then(() => self.skipWaiting())
+  );
+});
+
+// Activate Event - Clean old caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log('[SW] Deleting old cache:', cache);
+            return caches.delete(cache);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Fetch Event - Cache-First strategy with Network Fallback
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).then((networkResponse) => {
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
+        }
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseToCache);
+        });
+        return networkResponse;
+      }).catch(() => {
+        // Fallback for HTML navigation
+        if (event.request.headers.get('accept').includes('text/html')) {
+          return caches.match('./index.html');
+        }
+      });
+    })
+  );
+});
