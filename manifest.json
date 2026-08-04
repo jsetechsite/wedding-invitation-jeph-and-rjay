@@ -4,8 +4,8 @@
   "description": "Wedding Invitation",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#FAF7F2",
-  "theme_color": "#C5A059",
+  "background_color": "#F5F0EB",
+  "theme_color": "#C24426",
   "orientation": "portrait",
   "icons": [
     {

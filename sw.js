@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wedding-invitation-v18';
+const CACHE_NAME = 'wedding-invitation-v20';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -16,7 +16,10 @@ const ASSETS_TO_CACHE = [
   './assets/images/gallery-1.jpg',
   './assets/images/gallery-2.jpg',
   './assets/images/gallery-3.jpg',
-  './assets/images/gallery-4.jpg'
+  './assets/images/gallery-4.jpg',
+  './assets/images/attire.jpg',
+  './assets/images/rsvp-gift.jpg',
+  './assets/audio/wedding-ambient.mp3'
 ];
 
 // Install Event - Pre-cache core assets

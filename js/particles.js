@@ -44,7 +44,7 @@ class ParticleEngine {
       speedY: Math.random() * 0.5 + 0.2,
       speedX: Math.sin(Math.random() * Math.PI) * 0.4,
       opacity: Math.random() * 0.6 + 0.2,
-      color: isPetal ? '#E5C483' : '#D4AF37',
+      color: isPetal ? '#D4674A' : '#C24426',
       isPetal: isPetal,
       rotation: Math.random() * 360,
       spinSpeed: (Math.random() - 0.5) * 1.5

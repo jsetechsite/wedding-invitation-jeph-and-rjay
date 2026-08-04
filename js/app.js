@@ -150,14 +150,14 @@ function renderBankCards(banks) {
   if (!container || !banks) return;
 
   container.innerHTML = banks.map(b => `
-    <div class="glass-card card-sheen p-6 text-center border border-amber-300/40 relative group hover:border-amber-400 transition">
-      <div class="w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto text-amber-700 text-xl mb-3">
+    <div class="glass-card card-sheen p-6 text-center border border-orange-300/40 relative group hover:border-orange-400 transition">
+      <div class="w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto text-orange-700 text-xl mb-3">
         <i class="fa-solid fa-building-columns"></i>
       </div>
-      <h4 class="font-serif text-lg font-bold text-slate-800">${b.bankName}</h4>
-      <p class="font-sans text-xl font-semibold tracking-wider text-amber-700 my-2 select-all">${b.accountNumber}</p>
+      <h4 class="font-serif text-lg font-bold text-gray-800">${b.bankName}</h4>
+      <p class="font-sans text-xl font-semibold tracking-wider text-orange-700 my-2 select-all">${b.accountNumber}</p>
       <p class="font-sans text-xs text-gray-500 uppercase tracking-widest mb-4">a.n ${b.accountHolder}</p>
-      <button class="copy-bank-btn px-4 py-2 rounded-full bg-slate-900 hover:bg-amber-600 text-white font-sans text-xs tracking-wider uppercase transition inline-flex items-center gap-2" data-account="${b.accountNumber}">
+      <button class="copy-bank-btn px-4 py-2 rounded-full bg-gray-900 hover:bg-orange-600 text-white font-sans text-xs tracking-wider uppercase transition inline-flex items-center gap-2" data-account="${b.accountNumber}">
         <i class="fa-regular fa-copy"></i> Copy Account
       </button>
     </div>
@@ -192,7 +192,7 @@ function renderEntourage(e) {
     <div class="entourage-card">
       <div class="entourage-role-icon"><i class="fa-solid ${icon}"></i></div>
       <span class="entourage-eyebrow">${label}</span>
-      <p class="font-serif text-lg sm:text-xl text-slate-800 mt-1">${name}</p>
+      <p class="font-serif text-lg sm:text-xl text-gray-800 mt-1">${name}</p>
     </div>`;
 
   const nameListCard = (title, names) => `
@@ -242,7 +242,6 @@ function renderEntourage(e) {
 
       <!-- Key Party Roles -->
       <div class="reveal">
-        ${blockTitle("The Party")}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           ${roleCard("fa-crown", "Best Man", e.bestMan)}
           ${roleCard("fa-gem", "Maid of Honor", e.maidOfHonor)}
@@ -280,7 +279,7 @@ function initEnvelopeUnboxing() {
 
   openBtn.addEventListener("click", () => {
     coverScreen.classList.add("opened");
-    
+
     // Play background audio on user interaction gesture
     if (bgAudio && bgAudio.src) {
       bgAudio.play().then(() => {
@@ -318,7 +317,7 @@ function initAudioPlayer() {
     if (bgAudio.paused) {
       bgAudio.play().then(() => {
         musicBtn.classList.add("playing");
-      }).catch(() => {});
+      }).catch(() => { });
     } else {
       bgAudio.pause();
       musicBtn.classList.remove("playing");
@@ -346,7 +345,7 @@ function initGalleryAndLightbox() {
     <div class="gallery-item glass-card overflow-hidden shadow-lg reveal-zoom ${delays[idx % delays.length]}" data-url="${g.url}" data-caption="${g.caption}" data-index="${idx}">
       <img src="${g.url}" alt="${g.caption}" loading="lazy" decoding="async" class="w-full h-64 object-cover">
       <div class="gallery-overlay">
-        <p class="font-serif text-sm text-amber-200 font-medium">${g.caption}</p>
+        <p class="font-serif text-sm text-orange-200 font-medium">${g.caption}</p>
       </div>
     </div>
   `).join('');
@@ -472,7 +471,7 @@ function showToast(msg) {
   const msgEl = document.getElementById("toast-message");
   if (!toast) return;
 
-  if (msgEl) msgEl.innerHTML = `<i class="fa-solid fa-check-circle text-amber-400 mr-2"></i> ${msg}`;
+  if (msgEl) msgEl.innerHTML = `<i class="fa-solid fa-check-circle text-orange-400 mr-2"></i> ${msg}`;
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 3000);
 }
