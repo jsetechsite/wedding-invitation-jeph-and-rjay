@@ -49,10 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 14. GIFT QR ZOOM MODAL
   initQRModal();
 
-  // 15. SHARE INVITATION
+  // 15. ATTIRE GUIDE ZOOM MODAL
+  initAttireZoom();
+
+  // 16. SHARE INVITATION
   initShare();
 
-  // 16. STICKY NAVIGATION
+  // 17. STICKY NAVIGATION
   initNav();
 });
 
@@ -790,7 +793,43 @@ function initQRModal() {
 }
 
 /* ==========================================
-   15. SHARE INVITATION
+   15. ATTIRE GUIDE ZOOM
+   ========================================== */
+function initAttireZoom() {
+  const trigger = document.querySelector(".attire-image img");
+  const modal = document.getElementById("attire-modal");
+  const modalImg = document.getElementById("attire-modal-img");
+  const close = document.getElementById("attire-close");
+
+  if (!trigger || !modal) return;
+
+  const open = () => {
+    if (modalImg) modalImg.src = trigger.currentSrc || trigger.src;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    if (close) close.focus();
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (trigger && trigger.focus) trigger.focus();
+  };
+
+  trigger.addEventListener("click", open);
+  if (close) close.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
+  });
+}
+
+/* ==========================================
+   16. SHARE INVITATION
    ========================================== */
 function initShare() {
   const btn = document.getElementById("share-btn");
@@ -819,7 +858,7 @@ function initShare() {
 }
 
 /* ==========================================
-   16. STICKY NAVIGATION
+   17. STICKY NAVIGATION
    ========================================== */
 function initNav() {
   const nav = document.getElementById("site-nav");
