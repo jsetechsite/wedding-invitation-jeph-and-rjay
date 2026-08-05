@@ -407,12 +407,13 @@
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-10"></div>
         </div>
 
-        <div class="attire-image reveal-zoom delay-100">
+        <div class="attire-image cursor-pointer reveal-zoom delay-100">
           <img src="assets/images/attire.jpg" alt="Dress code illustrations" loading="lazy" decoding="async">
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <!-- Sponsors -->
+          <!--
           <div class="entourage-card entourage-card--featured reveal-left">
             <span class="entourage-eyebrow">To Our Principal Sponsors</span>
             <div class="mt-4 space-y-3">
@@ -439,8 +440,9 @@
               </div>
             </div>
           </div>
-
+          -->
           <!-- Guests -->
+          <!--
           <div class="entourage-card entourage-card--featured reveal-right">
             <span class="entourage-eyebrow">To Our Guests</span>
             <p class="font-serif text-lg text-gray-800 italic mt-4 leading-relaxed">
@@ -456,6 +458,8 @@
               <span class="swatch" style="background:#E8E8E8"></span>
             </div>
           </div>
+        -->
+
         </div>
       </div>
     </section>
@@ -619,6 +623,19 @@
       <img id="qr-modal-img" src="" alt="RSVP & Gift Guide"
         class="mx-auto rounded-xl shadow-2xl object-contain max-h-[72vh] bg-white p-4">
       <p class="font-serif text-lg text-orange-200 mt-4">RSVP &amp; Gift Guide</p>
+    </div>
+  </div>
+
+  <!-- Attire Guide Zoom Modal -->
+  <div id="attire-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Attire guide viewer">
+    <div class="lightbox-content relative max-w-3xl max-h-[85vh] p-4 text-center">
+      <button id="attire-close" class="absolute top-6 right-6 text-white text-3xl hover:text-orange-400 transition"
+        aria-label="Close Attire Guide">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="attire-modal-img" src="" alt="Dress code illustrations"
+        class="mx-auto rounded-lg shadow-2xl object-contain max-h-[75vh]">
+      <p class="font-serif text-lg text-orange-200 mt-4">Attire Guide</p>
     </div>
   </div>
 
