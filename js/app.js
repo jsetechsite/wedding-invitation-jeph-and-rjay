@@ -385,6 +385,21 @@ function initGalleryAndLightbox() {
     });
   });
 
+  // Add "See More" / "Show Less" button on desktop when there are 7+ gallery items
+  if (items.length > 6 && window.matchMedia && window.matchMedia("(min-width: 768px)").matches) {
+    const seeMoreBtn = document.createElement("button");
+    seeMoreBtn.className = "gallery-see-more";
+    seeMoreBtn.innerHTML = '<i class="fa-solid fa-images"></i> See More';
+    container.parentElement.insertBefore(seeMoreBtn, container.nextSibling);
+
+    seeMoreBtn.addEventListener("click", () => {
+      const expanded = container.classList.toggle("expanded");
+      seeMoreBtn.innerHTML = expanded
+        ? '<i class="fa-solid fa-chevron-up"></i> Show Less'
+        : '<i class="fa-solid fa-images"></i> See More';
+    });
+  }
+
   let _imageTransitioning = false;
 
   function showImage(index) {

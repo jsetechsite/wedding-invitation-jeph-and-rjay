@@ -916,6 +916,67 @@ section {
   .gallery-rail::-webkit-scrollbar {
     height: 0;
   }
+
+  /* Hide gallery items beyond the 6th on desktop */
+  .gallery-rail .gallery-item:nth-child(n+7) {
+    display: none;
+  }
+
+  .gallery-rail.expanded .gallery-item:nth-child(n+7) {
+    display: block;
+    animation: gallery-expand 0.4s ease backwards;
+  }
+
+  .gallery-rail.expanded .gallery-item:nth-child(7)  { animation-delay: 0.05s; }
+  .gallery-rail.expanded .gallery-item:nth-child(8)  { animation-delay: 0.1s; }
+  .gallery-rail.expanded .gallery-item:nth-child(9)  { animation-delay: 0.15s; }
+  .gallery-rail.expanded .gallery-item:nth-child(10) { animation-delay: 0.2s; }
+  .gallery-rail.expanded .gallery-item:nth-child(11) { animation-delay: 0.25s; }
+  .gallery-rail.expanded .gallery-item:nth-child(12) { animation-delay: 0.3s; }
+  .gallery-rail.expanded .gallery-item:nth-child(13) { animation-delay: 0.35s; }
+  .gallery-rail.expanded .gallery-item:nth-child(14) { animation-delay: 0.4s; }
+  .gallery-rail.expanded .gallery-item:nth-child(15) { animation-delay: 0.45s; }
+  .gallery-rail.expanded .gallery-item:nth-child(16) { animation-delay: 0.5s; }
+}
+
+@keyframes gallery-expand {
+  0% { opacity: 0; transform: scale(0.9) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Gallery See More / Show Less button */
+.gallery-see-more {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .gallery-see-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F5F0EB;
+    background: rgba(194, 68, 38, 0.25);
+    border: 1px solid rgba(194, 68, 38, 0.5);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .gallery-see-more:hover {
+    background: rgba(194, 68, 38, 0.45);
+    border-color: rgba(194, 68, 38, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(194, 68, 38, 0.3);
+  }
 }
 
 /* Lightbox Zoom Transition */
