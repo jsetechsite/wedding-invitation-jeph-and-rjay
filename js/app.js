@@ -172,17 +172,15 @@ function renderEntourage(e) {
   const container = document.getElementById("entourage-container");
   if (!container || !e) return;
 
-  const amp = `<span class="amp">&</span>`;
-
-  // Split an "A & B" string into two elegant serif lines with a cursive gold &
+  // Split an "A & B" string into two elegant serif lines (no ampersand)
   const splitCouple = (str) => {
     const parts = String(str).split("&").map(s => s.trim());
     if (parts.length < 2) return `<span class="person">${str}</span>`;
-    return parts.map(p => `<span class="person">${p}</span>`).join(amp);
+    return parts.map(p => `<span class="person">${p}</span>`).join("");
   };
 
   const inlineCouple = (wife, husband) =>
-    `<span class="entourage-couple-inline">${wife}${amp}${husband}</span>`;
+    `<span class="entourage-couple-inline"><span class="person">${wife}</span><span class="person">${husband}</span></span>`;
 
   const blockTitle = (label) => `
     <div class="entourage-block-title">
@@ -209,11 +207,11 @@ function renderEntourage(e) {
       <!-- Parents -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="entourage-card entourage-card--featured">
-          <span class="entourage-eyebrow">Parents of the Groom</span>
+          <span class="entourage-eyebrow">Groom's Parents</span>
           <div class="entourage-couple">${splitCouple(e.parents.groom)}</div>
         </div>
         <div class="entourage-card entourage-card--featured">
-          <span class="entourage-eyebrow">Parents of the Bride</span>
+          <span class="entourage-eyebrow">Bride's Parents</span>
           <div class="entourage-couple">${splitCouple(e.parents.bride)}</div>
         </div>
       </div>
@@ -222,11 +220,20 @@ function renderEntourage(e) {
       <div class="reveal">
         ${blockTitle("Principal Sponsors")}
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          ${e.principalSponsors.map(p => `
-            <div class="entourage-card">
-              ${inlineCouple(p.wife, p.husband)}
-            </div>
-          `).join("")}
+          <div class="entourage-card">
+            ${e.principalSponsors.map(p => `<p class="entourage-name">${p.wife}</p>`).join("")}
+          </div>
+          <div class="entourage-card">
+            ${e.principalSponsors.map(p => `<p class="entourage-name">${p.husband}</p>`).join("")}
+          </div>
+        </div>
+      </div>
+
+      <!-- Best Man & Maid of Honor -->
+      <div class="reveal">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          ${roleCard("fa-crown", "Best Man", e.bestMan)}
+          ${roleCard("fa-gem", "Maid of Honor", e.maidOfHonor)}
         </div>
       </div>
 
@@ -236,20 +243,10 @@ function renderEntourage(e) {
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           ${Object.entries(e.secondarySponsors).map(([kind, s]) => `
             <div class="entourage-card">
-              <span class="entourage-eyebrow">${kind.toUpperCase()}</span>
+              <span class="entourage-eyebrow">${kind.charAt(0).toUpperCase() + kind.slice(1)}</span>
               ${inlineCouple(s.wife, s.husband)}
             </div>
           `).join("")}
-        </div>
-      </div>
-
-      <!-- Key Party Roles -->
-      <div class="reveal">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          ${roleCard("fa-crown", "Best Man", e.bestMan)}
-          ${roleCard("fa-gem", "Maid of Honor", e.maidOfHonor)}
-          ${roleCard("fa-book-bible", "Bible Bearer", e.bibleBearer)}
-          ${roleCard("fa-ring", "Ring Bearer", e.ringBearer)}
         </div>
       </div>
 
@@ -264,6 +261,14 @@ function renderEntourage(e) {
         <div class="entourage-card max-w-md mx-auto">
           <span class="entourage-eyebrow">Flower Girls</span>
           ${e.flowerGirls.map(n => `<p class="entourage-name entourage-name--center">${n}</p>`).join("")}
+        </div>
+      </div>
+
+      <!-- Bible Bearer & Ring Bearer -->
+      <div class="reveal">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          ${roleCard("fa-book-bible", "Bible Bearer", e.bibleBearer)}
+          ${roleCard("fa-ring", "Ring Bearer", e.ringBearer)}
         </div>
       </div>
     </div>
@@ -380,20 +385,46 @@ function initGalleryAndLightbox() {
     });
   });
 
+  let _imageTransitioning = false;
+
   function showImage(index) {
-    if (!items.length) return;
-    currentIndex = (index + items.length) % items.length;
-    const item = items[currentIndex];
-    modalImg.src = item.getAttribute("data-url");
-    if (modalCaption) modalCaption.innerText = item.getAttribute("data-caption") || "";
-    // Preload the adjacent image for snappy navigation
-    const nextItem = items[(currentIndex + 1) % items.length];
-    if (nextItem) {
-      const pre = new Image();
-      pre.src = nextItem.getAttribute("data-url");
-    }
-    if (prevBtn) prevBtn.style.display = items.length > 1 ? "" : "none";
-    if (nextBtn) nextBtn.style.display = items.length > 1 ? "" : "none";
+    if (!items.length || _imageTransitioning) return;
+    const newIndex = (index + items.length) % items.length;
+
+    const direction = newIndex > currentIndex || (currentIndex === items.length - 1 && newIndex === 0) ? 1 : -1;
+    _imageTransitioning = true;
+
+    // Fade out + slide current image
+    modalImg.style.opacity = "0";
+    modalImg.style.transform = `translateX(${-direction * 30}px)`;
+
+    setTimeout(() => {
+      currentIndex = newIndex;
+      const item = items[currentIndex];
+      modalImg.src = item.getAttribute("data-url");
+      if (modalCaption) modalCaption.innerText = item.getAttribute("data-caption") || "";
+
+      // Preload adjacent images
+      const prevItem = items[(currentIndex - 1 + items.length) % items.length];
+      const nextItem = items[(currentIndex + 1) % items.length];
+      if (prevItem) { const p = new Image(); p.src = prevItem.getAttribute("data-url"); }
+      if (nextItem) { const p = new Image(); p.src = nextItem.getAttribute("data-url"); }
+
+      // Position off-screen opposite side, then slide in
+      modalImg.style.transform = `translateX(${direction * 30}px)`;
+      requestAnimationFrame(() => {
+        modalImg.style.opacity = "1";
+        modalImg.style.transform = "translateX(0)";
+      });
+
+      // Re-enable transitions after animation completes
+      const onDone = () => { _imageTransitioning = false; };
+      modalImg.addEventListener("transitionend", onDone, { once: true });
+      setTimeout(onDone, 400);
+
+      if (prevBtn) prevBtn.style.display = items.length > 1 ? "" : "none";
+      if (nextBtn) nextBtn.style.display = items.length > 1 ? "" : "none";
+    }, 300);
   }
 
   function openLightbox(item) {
@@ -915,6 +946,7 @@ function initNav() {
    ========================================== */
 function initGalleryRailDrag(container) {
   if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
+  if (window.matchMedia && window.matchMedia("(min-width: 768px)").matches) return;
 
   let isDown = false, startX = 0, scrollLeft = 0;
 

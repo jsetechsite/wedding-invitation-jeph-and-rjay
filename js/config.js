@@ -28,8 +28,8 @@ const WEDDING_CONFIG = {
   // Wedding Party / Entourage
   entourage: {
     parents: {
-      groom: "Mr. Henry M. Aranel & Mrs. Ma. Salve A. Aranel +",
-      bride: "Mr. Julio F. Espinosa Jr. + & Mrs. Emma L. Espinosa"
+      groom: "Henry M. Aranel & Ma. Salve A. Aranel +",
+      bride: "Julio F. Espinosa Jr. + & Emma L. Espinosa"
     },
     principalSponsors: [
       { wife: "Mrs. Beverly M. Alcantara", husband: "Mr. Zaldy M. Alcantara" },
@@ -138,6 +138,54 @@ const WEDDING_CONFIG = {
     {
       url: "assets/images/gallery-4.jpg",
       caption: "Hand in Hand"
+    },
+    {
+      url: "assets/images/gallery-5.jpg",
+      caption: "Together Forever"
+    },
+    {
+      url: "assets/images/gallery-6.jpg",
+      caption: "Our Happy Place"
+    },
+    {
+      url: "assets/images/gallery-7.jpg",
+      caption: "Love Laughs"
+    },
+    {
+      url: "assets/images/gallery-8.jpg",
+      caption: "Written in the Stars"
+    },
+    {
+      url: "assets/images/gallery-9.jpg",
+      caption: "Cherished Moments"
+    },
+    {
+      url: "assets/images/gallery-10.jpg",
+      caption: "Better Together"
+    },
+    {
+      url: "assets/images/gallery-11.jpg",
+      caption: "Always & Forever"
+    },
+    {
+      url: "assets/images/gallery-12.jpg",
+      caption: "Meant to Be"
+    },
+    {
+      url: "assets/images/gallery-13.jpg",
+      caption: "Endless Love"
+    },
+    {
+      url: "assets/images/gallery-14.jpg",
+      caption: "Happily Ever After"
+    },
+    {
+      url: "assets/images/gallery-15.jpg",
+      caption: "Two Souls, One Heart"
+    },
+    {
+      url: "assets/images/gallery-16.jpg",
+      caption: "Our Love Story"
     }
   ],
 

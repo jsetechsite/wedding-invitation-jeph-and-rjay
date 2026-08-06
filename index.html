@@ -130,7 +130,7 @@
       </div>
 
       <!-- Hero Card Content -->
-      <div class="relative z-10 max-w-2xl mx-auto text-white reveal active">
+      <div class="relative z-10 max-w-2xl lg:max-w-3xl mx-auto text-white reveal active">
         <span
           class="inline-block px-4 py-1 rounded-full border border-orange-400/40 text-orange-200 text-xs tracking-widest uppercase mb-4 backdrop-blur-md">
           Save The Date
@@ -193,7 +193,7 @@
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
             <span class="eyebrow-num on-dark">01</span> Two Hearts Joined As One
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white my-3" data-split>Groom & Bride</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Groom & Bride</h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-12"></div>
         </div>
 
@@ -293,7 +293,7 @@
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
             <span class="eyebrow-num on-dark">02</span> The Wedding Party
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white my-3" data-split>Our Entourage</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Our Entourage</h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-12"></div>
         </div>
         <div id="entourage-container" class="text-gray-800">
@@ -305,12 +305,12 @@
     <!-- EVENT DETAILS SECTION -->
 
     <section id="event" class="py-20 px-4 bg-gray-900 text-white relative">
-      <div class="max-w-5xl mx-auto text-center relative z-10">
+      <div class="max-w-5xl lg:max-w-6xl mx-auto text-center relative z-10">
         <div class="reveal-zoom">
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-300 uppercase">
             <span class="eyebrow-num on-dark">03</span> When & Where
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white gold-shimmer my-3">Wedding Events</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white gold-shimmer my-3">Wedding Events</h2>
           <div class="w-16 h-0.5 bg-orange-500 mx-auto mb-12"></div>
         </div>
 
@@ -380,7 +380,7 @@
     </div>
 
     <!-- ATTIRE GUIDE SECTION -->
-    <section id="attire" class="py-20 px-4 max-w-5xl mx-auto text-center relative ornament-floral">
+    <section id="attire" class="py-20 px-4 max-w-5xl lg:max-w-6xl mx-auto text-center relative ornament-floral">
       <div class="section-bg" aria-hidden="true">
         <img src="assets/images/attire.jpg" alt="" loading="lazy" decoding="async">
       </div>
@@ -403,7 +403,7 @@
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
             <span class="eyebrow-num on-dark">04</span> The Finer Details
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white my-3">Attire Guide</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3">Attire Guide</h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-10"></div>
         </div>
 
@@ -411,55 +411,34 @@
           <img src="assets/images/attire.jpg" alt="Dress code illustrations" loading="lazy" decoding="async">
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <!-- Sponsors -->
-          <!--
-          <div class="entourage-card entourage-card--featured reveal-left">
-            <span class="entourage-eyebrow">To Our Principal Sponsors</span>
-            <div class="mt-4 space-y-3">
-              <div>
-                <p class="font-sans text-xs uppercase tracking-widest text-orange-700 mb-1">Ninong</p>
-                <p class="font-serif text-lg text-gray-800 italic">Barong Tagalog</p>
-                <div class="attire-palette mt-2">
-                  <span class="swatch" style="background:#C24426"></span>
-                  <span class="swatch" style="background:#D4674A"></span>
-                  <span class="swatch" style="background:#E8927A"></span>
-                  <span class="swatch" style="background:#F5E0D8"></span>
-                </div>
-              </div>
-              <div class="w-12 h-px bg-orange-300 mx-auto"></div>
-              <div>
-                <p class="font-sans text-xs uppercase tracking-widest text-orange-700 mb-1">Ninang</p>
-                <p class="font-serif text-lg text-gray-800 italic">Formal Champagne Dress</p>
-                <div class="attire-palette mt-2">
-                  <span class="swatch" style="background:#C24426"></span>
-                  <span class="swatch" style="background:#D4674A"></span>
-                  <span class="swatch" style="background:#E8927A"></span>
-                  <span class="swatch" style="background:#F5E0D8"></span>
-                </div>
-              </div>
+        <!-- Attire Color Palettes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
+          <!-- Ninongs & Ninangs -->
+          <div class="attire-palette-card reveal-left delay-200">
+            <h3 class="font-cursive text-2xl text-white mb-1">Ninongs & Ninangs</h3>
+            <p class="font-sans text-xs uppercase tracking-widest text-orange-200 mb-4">Principal Sponsors</p>
+            <p class="font-serif text-lg text-white italic mb-1">Barong Tagalog / Formal Champagne Dress</p>
+            <div class="attire-palette mt-4 justify-center">
+              <span class="swatch" style="background:#BFA76A; --swatch-color:#BFA76A" data-hex="#BFA76A"></span>
+              <span class="swatch" style="background:#D4B98C; --swatch-color:#D4B98C" data-hex="#D4B98C"></span>
+              <span class="swatch" style="background:#E5D5AD; --swatch-color:#E5D5AD" data-hex="#E5D5AD"></span>
+              <span class="swatch" style="background:#F2E8D0; --swatch-color:#F2E8D0" data-hex="#F2E8D0"></span>
             </div>
           </div>
-          -->
-          <!-- Guests -->
-          <!--
-          <div class="entourage-card entourage-card--featured reveal-right">
-            <span class="entourage-eyebrow">To Our Guests</span>
-            <p class="font-serif text-lg text-gray-800 italic mt-4 leading-relaxed">
-              We kindly request our guests to wear<br>
-              <strong>shades of Gray</strong> in<br>
-              <strong>Semi-Formal Attire</strong>
-            </p>
-            <div class="attire-palette mt-4">
-              <span class="swatch" style="background:#4A4A4A"></span>
-              <span class="swatch" style="background:#7A7A7A"></span>
-              <span class="swatch" style="background:#A0A0A0"></span>
-              <span class="swatch" style="background:#C8C8C8"></span>
-              <span class="swatch" style="background:#E8E8E8"></span>
-            </div>
-          </div>
-        -->
 
+          <!-- Guests -->
+          <div class="attire-palette-card reveal-right delay-300">
+            <h3 class="font-cursive text-2xl text-white mb-1">Our Guests</h3>
+            <p class="font-sans text-xs uppercase tracking-widest text-orange-200 mb-4">Semi-Formal Attire</p>
+            <p class="font-serif text-lg text-white italic mb-1">Shades of Gray</p>
+            <div class="attire-palette mt-4 justify-center">
+              <span class="swatch" style="background:#4A4A4A; --swatch-color:#4A4A4A" data-hex="#4A4A4A"></span>
+              <span class="swatch" style="background:#7A7A7A; --swatch-color:#7A7A7A" data-hex="#7A7A7A"></span>
+              <span class="swatch" style="background:#A0A0A0; --swatch-color:#A0A0A0" data-hex="#A0A0A0"></span>
+              <span class="swatch" style="background:#C8C8C8; --swatch-color:#C8C8C8" data-hex="#C8C8C8"></span>
+              <span class="swatch" style="background:#E8E8E8; --swatch-color:#E8E8E8" data-hex="#E8E8E8"></span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -471,7 +450,7 @@
     </div>
 
     <!-- PHOTO GALLERY SECTION -->
-    <section id="gallery" class="py-20 px-4 max-w-5xl mx-auto relative ornament-floral">
+    <section id="gallery" class="py-20 px-4 max-w-5xl lg:max-w-6xl mx-auto relative ornament-floral">
       <div class="section-bg" aria-hidden="true">
         <img src="assets/images/gallery-3.jpg" alt="" loading="lazy" decoding="async">
       </div>
@@ -494,7 +473,7 @@
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
             <span class="eyebrow-num on-dark">05</span> Captured Moments
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white my-3" data-split>Our Gallery</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Our Gallery</h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-12"></div>
         </div>
 
@@ -510,12 +489,12 @@
       <div class="section-bg" aria-hidden="true">
         <img src="assets/images/gallery-4.jpg" alt="" loading="lazy" decoding="async">
       </div>
-      <div class="max-w-3xl mx-auto text-center reveal-zoom relative z-10">
+      <div class="max-w-3xl lg:max-w-4xl mx-auto text-center reveal-zoom relative z-10">
         <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
           <span class="eyebrow-num on-dark">06</span> Generosity & Love
         </span>
 
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white my-3" id="gift-title" data-split>Wedding Gift
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white my-3" id="gift-title" data-split>Wedding Gift
         </h2>
         <!--
         <p class="font-serif text-sm text-gray-300 max-w-xl mx-auto leading-relaxed mb-8" id="gift-description">
@@ -554,7 +533,7 @@
           <path d="M8 75 C 20 72, 40 55, 58 28" />
         </svg>
       </div>
-      <div class="max-w-2xl mx-auto reveal relative z-10">
+      <div class="max-w-2xl lg:max-w-3xl mx-auto reveal relative z-10">
         <div class="rsvp-halo" aria-hidden="true"></div>
         <div class="relative z-10">
 
@@ -565,7 +544,7 @@
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-300 uppercase">
             <span class="eyebrow-num on-dark">07</span> Be Our Guest
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold gold-shimmer my-3">RSVP Confirmation</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold gold-shimmer my-3">RSVP Confirmation</h2>
           <p class="font-serif text-base text-gray-300 leading-relaxed mb-8" id="rsvp-message">
             We would be honored by your presence. Please take a moment to confirm your attendance via our Google Form.
           </p>
