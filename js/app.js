@@ -321,7 +321,7 @@ function initEnvelopeUnboxing() {
     startAudio();
 
     // Lift the cover to reveal the main site after the flap opens
-    setTimeout(proceed, 1950);
+    setTimeout(proceed, 1150);
   };
 
   openBtn.addEventListener("click", open);
