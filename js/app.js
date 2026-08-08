@@ -55,7 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // 16. SHARE INVITATION
   initShare();
 
-  // 17. STICKY NAVIGATION
+  // 17. ADD TO CALENDAR CHOOSER
+  initCalendarChooser();
+
+  // 18. STICKY NAVIGATION
   initNav();
 });
 
@@ -285,10 +288,9 @@ function initEnvelopeUnboxing() {
 
   if (!openBtn || !coverScreen) return;
 
-  openBtn.addEventListener("click", () => {
-    coverScreen.classList.add("opened");
+  let proceeding = false;
 
-    // Play background audio on user interaction gesture
+  const startAudio = () => {
     if (bgAudio && bgAudio.src) {
       bgAudio.play().then(() => {
         const musicBtn = document.getElementById("music-toggle-btn");
@@ -297,15 +299,32 @@ function initEnvelopeUnboxing() {
         console.log("Audio play deferred or blocked by browser:", err);
       });
     }
+  };
 
-    // Trigger hero element reveal
+  const proceed = () => {
+    if (proceeding) return;
+    proceeding = true;
+    coverScreen.classList.add("opened");
+
     setTimeout(() => {
       const heroReveal = document.querySelector("#hero .reveal");
       if (heroReveal) heroReveal.classList.add("active");
       const siteNav = document.getElementById("site-nav");
       if (siteNav) siteNav.classList.add("visible");
     }, 400);
-  });
+  };
+
+  const open = () => {
+    if (coverScreen.classList.contains("flap-open")) { proceed(); return; }
+
+    coverScreen.classList.add("flap-open");
+    startAudio();
+
+    // Lift the cover to reveal the main site after the flap opens
+    setTimeout(proceed, 1950);
+  };
+
+  openBtn.addEventListener("click", open);
 }
 
 /* ==========================================
@@ -904,7 +923,177 @@ function initShare() {
 }
 
 /* ==========================================
-   17. STICKY NAVIGATION
+   17. ADD TO CALENDAR CHOOSER
+   ========================================== */
+function initCalendarChooser() {
+  const modal = document.getElementById("calendar-modal");
+  const closeBtn = document.getElementById("calendar-close");
+  const optionsEl = document.getElementById("calendar-options");
+  const titleEl = document.getElementById("calendar-modal-title");
+
+  if (!modal || !optionsEl) return;
+
+  const detectDevice = () => {
+    const ua = navigator.userAgent || "";
+    const pf = navigator.platform || "";
+    if (/iPad|iPhone|iPod/.test(ua) || (pf === "MacIntel" && navigator.maxTouchPoints > 1)) return "ios";
+    if (/Android/.test(ua)) return "android";
+    if (/Windows/.test(ua)) return "windows";
+    return "other";
+  };
+
+  const recommendedFor = (device) => device === "ios" ? "apple" : device === "windows" ? "outlook" : "google";
+
+  const fmtIso = (val) => {
+    if (!val) return "";
+    const s = String(val).replace(/T(\d{6})Z$/, "T$1");
+    return s.length === 15 ? `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}T${s.slice(9, 11)}:${s.slice(11, 13)}:${s.slice(13, 15)}Z` : val;
+  };
+
+  const parseEvent = (kind) => {
+    const ev = WEDDING_CONFIG.events[kind];
+    if (!ev || !ev.googleCalendarUrl) return null;
+    let u;
+    try { u = new URL(ev.googleCalendarUrl); } catch (e) { return null; }
+    const dates = (u.searchParams.get("dates") || "").split("/");
+    const summary = u.searchParams.get("text") || "";
+    const location = u.searchParams.get("location") || "";
+    const details = u.searchParams.get("details") || "";
+    const startUtc = dates[0] || "";
+    const endUtc = dates[1] || "";
+    return { kind, title: ev.title, summary, startUtc, endUtc, location, details, venue: ev.venue, address: ev.address };
+  };
+
+  const icsEscape = (val) => (val || "").replace(/\\/g, "\\\\").replace(/,/g, "\\,").replace(/;/g, "\\;").replace(/\r?\n/g, "\\n");
+
+  const buildIcs = (ev) => {
+    const now = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    return [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//WeddingInvitation//AddToCalendar//EN",
+      "CALSCALE:GREGORIAN",
+      "BEGIN:VEVENT",
+      `UID:${ev.kind}-${ev.startUtc}@wedding-invite`,
+      `DTSTAMP:${now}`,
+      `DTSTART:${ev.startUtc}`,
+      `DTEND:${ev.endUtc}`,
+      `SUMMARY:${icsEscape(ev.summary)}`,
+      ev.details ? `DESCRIPTION:${icsEscape(ev.details)}` : "",
+      ev.location ? `LOCATION:${icsEscape(ev.location)}` : "",
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].filter(Boolean).join("\r\n");
+  };
+
+  const downloadIcs = (ev) => {
+    const blob = new Blob([buildIcs(ev)], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `wedding-${ev.kind}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  };
+
+  const openIcsOnDevice = (ev) => {
+    window.open("data:text/calendar;charset=utf-8," + encodeURIComponent(buildIcs(ev)), "_blank");
+  };
+
+  let current = null;
+
+  const closeModal = () => {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    optionsEl.innerHTML = "";
+  };
+
+  const openModal = (kind) => {
+    const ev = parseEvent(kind);
+    if (!ev) { showToast("Calendar details not available yet."); return; }
+    current = ev;
+
+    const device = detectDevice();
+    const recommended = recommendedFor(device);
+    const googleUrl = WEDDING_CONFIG.events[kind].googleCalendarUrl;
+    const outlook = "https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent"
+      + `&subject=${encodeURIComponent(ev.summary)}`
+      + `&body=${encodeURIComponent(ev.details || ev.summary)}`
+      + `&location=${encodeURIComponent(ev.location)}`
+      + `&startdt=${encodeURIComponent(fmtIso(ev.startUtc))}`
+      + `&enddt=${encodeURIComponent(fmtIso(ev.endUtc))}`
+      + "&allday=false";
+    const yahoo = "https://calendar.yahoo.com/?v=60"
+      + `&title=${encodeURIComponent(ev.summary)}`
+      + `&st=${encodeURIComponent(ev.startUtc)}`
+      + `&et=${encodeURIComponent(ev.endUtc)}`
+      + `&in_loc=${encodeURIComponent(ev.location)}`
+      + `&desc=${encodeURIComponent(ev.details || "")}`;
+
+    const opts = [
+      { key: "google", label: "Google Calendar", icon: "fa-brands fa-google", href: googleUrl },
+      { key: "apple", label: "Apple Calendar", icon: "fa-brands fa-apple", href: "" },
+      { key: "outlook", label: "Outlook", icon: "fa-brands fa-microsoft", href: outlook },
+      { key: "yahoo", label: "Yahoo Calendar", icon: "fa-brands fa-yahoo", href: yahoo },
+      { key: "ics", label: "Download .ics", icon: "fa-regular fa-file", href: "" }
+    ];
+    const ordered = [
+      opts.find(o => o.key === recommended),
+      ...opts.filter(o => o.key !== recommended)
+    ];
+
+    const badge = (rec) => rec ? `<span class="cal-recommended">Recommended</span>` : "";
+    optionsEl.innerHTML = ordered.map((o) => {
+      const rec = o.key === recommended;
+      const openTag = o.href
+        ? `<a class="calendar-option" href="${o.href}" target="_blank" rel="noopener">`
+        : `<button type="button" class="calendar-option" data-action="${o.key}">`;
+      const closeTag = o.href ? "</a>" : "</button>";
+      return openTag
+        + `<i class="${o.icon} icon"></i>`
+        + `<span class="cal-label">${o.label}</span>`
+        + badge(rec)
+        + `<i class="fa-solid fa-chevron-right" style="font-size:0.8rem;opacity:0.6;"></i>`
+        + closeTag;
+    }).join("");
+
+    titleEl.textContent = `${ev.title} · Add to Calendar`;
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    if (closeBtn) closeBtn.focus();
+  };
+
+  optionsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-action]");
+    if (!btn || !current) return;
+    e.preventDefault();
+    const action = btn.getAttribute("data-action");
+    if (action === "apple") {
+      const ua = navigator.userAgent || "";
+      if (/iPad|iPhone|iPod|Mac/i.test(ua)) openIcsOnDevice(current);
+      else downloadIcs(current);
+    } else if (action === "ics") {
+      downloadIcs(current);
+    }
+  });
+
+  document.querySelectorAll("[data-event]").forEach((btn) => {
+    btn.addEventListener("click", () => openModal(btn.getAttribute("data-event")));
+  });
+
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
+  });
+}
+
+/* ==========================================
+   18. STICKY NAVIGATION
    ========================================== */
 function initNav() {
   const nav = document.getElementById("site-nav");

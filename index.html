@@ -66,31 +66,32 @@
        1. COVER / UNBOXING ENVELOPE SCREEN
        ========================================== -->
   <div id="cover-screen">
-    <!-- Decorative floral vine (left side) -->
-    <svg id="cover-vine" aria-hidden="true" viewBox="0 0 340 1000" preserveAspectRatio="xMidYMid meet">
-      <path class="vine-path" d="M 20 0 C 60 120, 10 220, 40 320 C 80 420, 30 520, 20 640 C 10 760, 60 860, 30 1000" />
-      <path class="vine-leaf" d="M 42 180 C 70 160, 90 200, 60 230 C 40 240, 30 210, 42 180 Z" />
-      <path class="vine-leaf" d="M 20 420 C -10 400, -20 440, 0 470 C 15 490, 28 455, 20 420 Z" />
-      <path class="vine-leaf" d="M 60 620 C 95 600, 100 650, 70 675 C 45 690, 42 640, 60 620 Z" />
-      <path class="vine-leaf" d="M 35 760 C 5 740, -5 780, 15 810 C 30 830, 45 790, 35 760 Z" />
-      <circle class="vine-leaf" cx="90" cy="250" r="8" />
-      <circle class="vine-leaf" cx="80" cy="700" r="9" />
-      <circle class="vine-leaf" cx="50" cy="880" r="7" />
-    </svg>
+    <div class="env-stage" aria-label="Wedding invitation envelope">
+      <div class="invite-envelope">
+        <!-- Envelope back panel -->
+        <div class="env-back"></div>
 
-    <div class="envelope-box">
-      <p class="font-sans text-xs uppercase tracking-widest text-white mb-2">You Are Cordially Invited To</p>
-      <p class="font-cursive text-3xl text-white my-1">The Wedding of</p>
-      <h1 class="font-serif text-3xl md:text-4xl text-white font-bold my-3" id="cover-couple-names">
-        Rjay & Jeph
-      </h1>
-      <p class="font-sans text-sm text-white my-2" id="cover-date">Saturday, December 19, 2026</p>
+        <!-- Envelope front face with the printed invitation -->
+        <div class="env-front">
+          <div class="env-invite">
+            <p class="env-kicker">You Are Cordially Invited To</p>
+            <h2 class="font-cursive env-cursive">The Wedding of</h2>
+            <h1 class="font-serif env-couple" id="cover-couple-names">Rjay &amp; Jeph</h1>
+            <div class="env-divider"><span></span><i class="fa-solid fa-heart"></i><span></span></div>
+            <p class="font-sans env-date" id="cover-date">Saturday, December 19, 2026</p>
+          </div>
+        </div>
 
-      <!-- Animated Wax Seal Open Button -->
-      <div class="wax-seal-btn" id="open-invitation-btn" title="Tap to Open Invitation" data-magnetic="14">
-        <i class="fa-solid fa-envelope-open text-2xl text-orange-900"></i>
+        <!-- Envelope flap -->
+        <div class="env-flap"></div>
+
+        <!-- Wax seal (on the flap tip) -->
+        <button type="button" class="wax-seal-btn env-seal" id="open-invitation-btn"
+          title="Tap to Open Invitation" data-magnetic="14" aria-label="Open invitation">
+          <i class="fa-solid fa-envelope-open text-2xl text-[#6b1a10]"></i>
+        </button>
       </div>
-      <p class="font-sans text-xs text-white/70 mt-4 tracking-wider uppercase">Tap Wax Seal to Open</p>
+      <p class="env-hint">Tap the Wax Seal to Open</p>
     </div>
   </div>
 
@@ -131,17 +132,19 @@
 
       <!-- Hero Card Content -->
       <div class="relative z-10 max-w-2xl lg:max-w-3xl mx-auto text-white reveal active">
-        <span
-          class="inline-block px-4 py-1 rounded-full border border-orange-400/40 text-orange-200 text-xs tracking-widest uppercase mb-4 backdrop-blur-md">
-          Save The Date
-        </span>
+        <div>
+          <span
+            class="inline-block px-4 py-1 rounded-full border border-orange-400/40 text-orange-200 text-xs tracking-widest uppercase mb-4 backdrop-blur-md">
+            Save The Date
+          </span>
+        </div>
         <h2 class="font-cursive text-4xl sm:text-5xl md:text-6xl text-orange-200 mb-2" data-split>The Wedding of</h2>
         <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight gold-gradient-text my-4"
           id="hero-couple-names">
-          Alexander & Sophia
+          Rjay & Jeph
         </h1>
         <p class="font-serif text-lg sm:text-xl text-gray-200 italic mb-8" id="hero-date">
-          Saturday, November 28, 2026
+          Saturday, December 19, 2026
         </p>
 
         <!-- COUNTDOWN TIMER -->
@@ -190,10 +193,13 @@
       </div>
       <div class="relative z-10">
         <div class="reveal-zoom">
-          <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
-            <span class="eyebrow-num on-dark">01</span> Two Hearts Joined As One
-          </span>
-          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Groom & Bride</h2>
+          <div>
+            <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
+              <span class="eyebrow-num on-dark">01</span> Two Hearts Joined As One
+            </span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Groom & Bride
+          </h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-12"></div>
         </div>
 
@@ -290,10 +296,13 @@
       </div>
       <div class="relative z-10">
         <div class="reveal-zoom">
-          <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
-            <span class="eyebrow-num on-dark">02</span> The Wedding Party
-          </span>
-          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Our Entourage</h2>
+          <div>
+            <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
+              <span class="eyebrow-num on-dark">02</span> The Wedding Party
+            </span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Our Entourage
+          </h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-12"></div>
         </div>
         <div id="entourage-container" class="text-gray-800">
@@ -310,7 +319,8 @@
           <span class="eyebrow text-xs font-sans tracking-widest text-orange-300 uppercase">
             <span class="eyebrow-num on-dark">03</span> When & Where
           </span>
-          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white gold-shimmer my-3">Wedding Events</h2>
+          <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white gold-shimmer my-3">Wedding Events
+          </h2>
           <div class="w-16 h-0.5 bg-orange-500 mx-auto mb-12"></div>
         </div>
 
@@ -335,10 +345,10 @@
                 class="px-4 py-2.5 rounded-full bg-orange-600 hover:bg-orange-500 text-gray-950 font-semibold text-xs tracking-wider uppercase transition inline-flex items-center justify-center gap-2">
                 <i class="fa-solid fa-map-location-dot"></i> View Location Map
               </a>
-              <a id="ceremony-cal-btn" href="#" target="_blank"
+              <button id="ceremony-cal-btn" type="button" data-event="ceremony"
                 class="px-4 py-2.5 rounded-full border border-orange-400/40 hover:bg-gray-700 text-orange-200 font-semibold text-xs tracking-wider uppercase transition inline-flex items-center justify-center gap-2">
                 <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
-              </a>
+              </button>
             </div>
           </div>
 
@@ -363,10 +373,10 @@
                 class="px-4 py-2.5 rounded-full bg-orange-600 hover:bg-orange-500 text-gray-950 font-semibold text-xs tracking-wider uppercase transition inline-flex items-center justify-center gap-2">
                 <i class="fa-solid fa-map-location-dot"></i> View Location Map
               </a>
-              <a id="reception-cal-btn" href="#" target="_blank"
+              <button id="reception-cal-btn" type="button" data-event="reception"
                 class="px-4 py-2.5 rounded-full border border-orange-400/40 hover:bg-gray-700 text-orange-200 font-semibold text-xs tracking-wider uppercase transition inline-flex items-center justify-center gap-2">
                 <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -400,9 +410,11 @@
       </div>
       <div class="relative z-10">
         <div class="reveal-zoom">
-          <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
-            <span class="eyebrow-num on-dark">04</span> The Finer Details
-          </span>
+          <div>
+            <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
+              <span class="eyebrow-num on-dark">04</span> The Finer Details
+            </span>
+          </div>
           <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3">Attire Guide</h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-10"></div>
         </div>
@@ -470,9 +482,11 @@
       </div>
       <div class="relative z-10">
         <div class="text-center reveal-zoom">
-          <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
-            <span class="eyebrow-num on-dark">05</span> Captured Moments
-          </span>
+          <div>
+            <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
+              <span class="eyebrow-num on-dark">05</span> Captured Moments
+            </span>
+          </div>
           <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white my-3" data-split>Our Gallery</h2>
           <div class="w-16 h-0.5 bg-orange-400 mx-auto mb-12"></div>
         </div>
@@ -490,11 +504,13 @@
         <img src="assets/images/gallery-4.jpg" alt="" loading="lazy" decoding="async">
       </div>
       <div class="max-w-3xl lg:max-w-4xl mx-auto text-center reveal-zoom relative z-10">
-        <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
-          <span class="eyebrow-num on-dark">06</span> Generosity & Love
-        </span>
-
-        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white my-3" id="gift-title" data-split>Wedding Gift
+        <div>
+          <span class="eyebrow text-xs font-sans tracking-widest text-orange-200 uppercase">
+            <span class="eyebrow-num on-dark">06</span> Generosity & Love
+          </span>
+        </div>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white my-3" id="gift-title" data-split>
+          Wedding Gift
         </h2>
         <!--
         <p class="font-serif text-sm text-gray-300 max-w-xl mx-auto leading-relaxed mb-8" id="gift-description">
@@ -541,9 +557,11 @@
             class="w-16 h-16 bg-orange-500/20 border border-orange-500/40 rounded-full flex items-center justify-center mx-auto text-orange-300 text-3xl mb-6">
             <i class="fa-regular fa-envelope"></i>
           </div>
-          <span class="eyebrow text-xs font-sans tracking-widest text-orange-300 uppercase">
-            <span class="eyebrow-num on-dark">07</span> Be Our Guest
-          </span>
+          <div>
+            <span class="eyebrow text-xs font-sans tracking-widest text-orange-300 uppercase">
+              <span class="eyebrow-num on-dark">07</span> Be Our Guest
+            </span>
+          </div>
           <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold gold-shimmer my-3">RSVP Confirmation</h2>
           <p class="font-serif text-base text-gray-300 leading-relaxed mb-8" id="rsvp-message">
             We would be honored by your presence. Please take a moment to confirm your attendance via our Google Form.
@@ -615,6 +633,19 @@
       <img id="attire-modal-img" src="" alt="Dress code illustrations"
         class="mx-auto rounded-lg shadow-2xl object-contain max-h-[75vh]">
       <p class="font-serif text-lg text-orange-200 mt-4">Attire Guide</p>
+    </div>
+  </div>
+
+  <!-- Add to Calendar Chooser Modal -->
+  <div id="calendar-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Add to calendar">
+    <div class="lightbox-content relative max-w-md max-h-[85vh] p-6 text-center">
+      <button id="calendar-close" class="absolute top-4 right-4 text-white text-3xl hover:text-orange-400 transition"
+        aria-label="Close Calendar Options">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="font-serif text-2xl font-bold text-orange-200 mb-1" id="calendar-modal-title">Add to Calendar</h3>
+      <p class="font-sans text-xs text-gray-300 mb-6" id="calendar-modal-sub">Choose a calendar to save this event.</p>
+      <div id="calendar-options" class="flex flex-col gap-3"></div>
     </div>
   </div>
 
