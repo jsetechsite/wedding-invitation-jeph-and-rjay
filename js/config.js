@@ -73,26 +73,26 @@ const WEDDING_CONFIG = {
 
   // Wedding Date & Time
   // Format: YYYY-MM-DDTHH:mm:ss (used for the countdown timer)
-  weddingDate: "2026-12-19T09:00:00",
+  weddingDate: "2026-12-19T10:30:00",
   displayDate: "Saturday, December 19, 2026",
 
   // Events Schedule
   events: {
     ceremony: {
       title: "Holy Matrimony",
-      time: "09:00 AM - 10:30 AM",
+      time: "10:30 AM - 11:30 AM",
       venue: "St. Gregory the Great Parish Church",
       address: "Mons. F. Reyes St., Old Albay District, Legazpi City, Albay",
       googleMapsUrl: "https://maps.google.com/?q=St+Gregory+the+Great+Parish+Church+Legazpi+City",
-      googleCalendarUrl: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Holy+Matrimony+Rjay+%26+Jeph&dates=20261219T010000Z/20261219T023000Z&details=Wedding+Ceremony&location=St.+Gregory+the+Great+Parish+Church"
+      googleCalendarUrl: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Holy+Matrimony+Rjay+%26+Jeph&dates=20261219T023000Z/20261219T033000Z&details=Wedding+Ceremony&location=St.+Gregory+the+Great+Parish+Church"
     },
     reception: {
       title: "Wedding Reception",
-      time: "12:00 PM - 03:00 PM",
+      time: "12:00 PM - 04:00 PM",
       venue: "Casa Lorenzo",
       address: "Purok 1, Tagas Daraga, Albay",
       googleMapsUrl: "https://maps.google.com/?q=Casa+Lorenzo+Tagas+Daraga+Albay",
-      googleCalendarUrl: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+Reception+Rjay+%26+Jeph&dates=20261219T040000Z/20261219T070000Z&details=Wedding+Reception&location=Casa+Lorenzo"
+      googleCalendarUrl: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+Reception+Rjay+%26+Jeph&dates=20261219T040000Z/20261219T080000Z&details=Wedding+Reception&location=Casa+Lorenzo"
     }
   },
 

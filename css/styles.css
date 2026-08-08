@@ -1471,17 +1471,7 @@ section {
   line-height: 1.3;
   color: #374151;
   margin: 0;
-  padding: 0.34rem 0 0.34rem 1.4rem;
-}
-
-.entourage-name::before {
-  content: '\25C6';
-  position: absolute;
-  left: 0.15rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.5rem;
-  color: var(--color-gold);
+  padding: 0.34rem 0;
 }
 
 .entourage-name--center {
