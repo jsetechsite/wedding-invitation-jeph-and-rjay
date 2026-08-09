@@ -172,7 +172,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background: radial-gradient(130% 140% at 50% 0%, var(--color-terracotta-light) 0%, var(--color-terracotta) 38%, var(--color-terracotta-dark) 78%, #4A1A14 100%);
+  background: radial-gradient(130% 140% at 50% 0%, #FFFFFF 0%, #FAF7F2 38%, #F5F0EB 78%, #EDE5DB 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,7 +186,7 @@ body {
   width: 70vmin;
   height: 70vmin;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(197, 160, 89, 0.18) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.12) 0%, transparent 68%);
   top: 6%;
   left: 50%;
   transform: translateX(-50%);
@@ -1653,6 +1653,8 @@ section>.max-w-2xl {
   object-fit: cover;
   object-position: center;
   filter: saturate(0.8) brightness(0.7);
+  will-change: transform;
+  transition: transform 0.1s linear;
 }
 
 @media (min-width: 768px) {
@@ -1853,6 +1855,13 @@ section[id] {
   border: 1px solid rgba(194, 68, 38, 0.5);
   color: #D4674A;
   font-size: 0.9rem;
+}
+
+.nav-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .nav-toggle {
@@ -2056,4 +2065,94 @@ section[id] {
   .countdown-card:last-child {
     animation: none;
   }
+}
+
+/* ==========================================
+   GALLERY PAGE - TILE GRID (Instagram-style)
+   ========================================== */
+
+.gallery-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  background: #111;
+}
+
+@media (min-width: 640px) {
+  .gallery-tile-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-tile-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1a1a1a;
+}
+
+.gallery-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gallery-tile:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+.gallery-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.gallery-tile:hover .gallery-tile-overlay {
+  opacity: 1;
+}
+
+/* View All Button (on main page) */
+.gallery-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #C5A059, #D4A843);
+  color: #1A2238;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+}
+
+.gallery-view-all:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+}
+
+.gallery-view-all i {
+  font-size: 0.9rem;
 }

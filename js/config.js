@@ -13,16 +13,17 @@ const WEDDING_CONFIG = {
       name: "Rjay Aranel",
       shortName: "Rjay",
       parents: "Son of Mr. Henry M. Aranel & Mrs. Ma. Salve A. Aranel +",
-      instagram: "@rjayespinosa",
+      social: { platform: "facebook", handle: "@rjay.lenara" },
       image: "assets/images/groom.jpg"
     },
     bride: {
       name: "Jeph Senile Espinosa",
       shortName: "Jeph",
       parents: "Daughter of Mr. Julio F. Espinosa Jr. + & Mrs. Emma L. Espinosa",
-      instagram: "@jephespinosa",
+      social: { platform: "instagram", handle: "@jphsnlesp" },
       image: "assets/images/bride.jpg"
-    }
+    },
+    thankYou: "Rjay and Jeph"
   },
 
   // Wedding Party / Entourage
@@ -186,6 +187,42 @@ const WEDDING_CONFIG = {
     {
       url: "assets/images/gallery-16.jpg",
       caption: "Our Love Story"
+    },
+    {
+      url: "assets/images/gallery-17.jpg",
+      caption: "A Beautiful Moment"
+    },
+    {
+      url: "assets/images/gallery-18.jpg",
+      caption: "Love in the Air"
+    },
+    {
+      url: "assets/images/gallery-19.jpg",
+      caption: "Forever Yours"
+    },
+    {
+      url: "assets/images/gallery-20.jpg",
+      caption: "Heartfelt Joy"
+    },
+    {
+      url: "assets/images/gallery-21.jpg",
+      caption: "Eternal Bliss"
+    },
+    {
+      url: "assets/images/gallery-22.jpg",
+      caption: "Sweet Memories"
+    },
+    {
+      url: "assets/images/gallery-23.jpg",
+      caption: "Together Always"
+    },
+    {
+      url: "assets/images/gallery-24.jpg",
+      caption: "Our Special Day"
+    },
+    {
+      url: "assets/images/gallery-25.jpg",
+      caption: "Love Never Fades"
     }
   ],
 

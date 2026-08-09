@@ -1,7 +1,8 @@
-const CACHE_NAME = 'wedding-invitation-v43';
+const CACHE_NAME = 'wedding-invitation-v48';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './gallery.html',
   './manifest.json',
   './css/styles.css',
   './js/config.js',
@@ -10,9 +11,12 @@ const ASSETS_TO_CACHE = [
   './js/app.js',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
+  './assets/images/logo.jpg',
   './assets/images/couple-cover.jpg',
   './assets/images/groom.jpg',
   './assets/images/bride.jpg',
+  './assets/images/photo1.jpg',
+  './assets/images/photo2.jpg',
   './assets/images/gallery-1.jpg',
   './assets/images/gallery-2.jpg',
   './assets/images/gallery-3.jpg',
@@ -29,6 +33,15 @@ const ASSETS_TO_CACHE = [
   './assets/images/gallery-14.jpg',
   './assets/images/gallery-15.jpg',
   './assets/images/gallery-16.jpg',
+  './assets/images/gallery-17.jpg',
+  './assets/images/gallery-18.jpg',
+  './assets/images/gallery-19.jpg',
+  './assets/images/gallery-20.jpg',
+  './assets/images/gallery-21.jpg',
+  './assets/images/gallery-22.jpg',
+  './assets/images/gallery-23.jpg',
+  './assets/images/gallery-24.jpg',
+  './assets/images/gallery-25.jpg',
   './assets/images/attire.jpg',
   './assets/images/rsvp-gift.jpg',
   './assets/audio/wedding-ambient.mp3'

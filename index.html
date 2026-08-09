@@ -16,8 +16,8 @@
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+  <link rel="apple-touch-icon" href="assets/images/logo.jpg">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +35,7 @@
   <nav id="site-nav" aria-label="Sections" aria-hidden="true">
     <div class="nav-inner">
       <a href="#hero" class="nav-brand" aria-label="Back to top">
-        <i class="fa-solid fa-heart text-orange-300"></i>
+        <img id="nav-logo" src="assets/images/logo.jpg" alt="Wedding logo" class="nav-logo">
       </a>
       <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-menu"
         aria-label="Toggle navigation menu">
@@ -219,7 +219,7 @@
               Eleanor Vance</p>
             <a id="groom-ig" href="#" target="_blank"
               class="inline-flex items-center gap-2 text-xs text-orange-700 hover:text-orange-900 transition">
-              <i class="fa-brands fa-instagram text-base"></i> <span id="groom-ig-handle">@alexandervance</span>
+              <i id="groom-ig-icon" class="fa-brands fa-instagram text-base"></i> <span id="groom-ig-handle">@alexandervance</span>
             </a>
           </div>
 
@@ -238,7 +238,7 @@
               Mrs. Clara Sterling</p>
             <a id="bride-ig" href="#" target="_blank"
               class="inline-flex items-center gap-2 text-xs text-orange-700 hover:text-orange-900 transition">
-              <i class="fa-brands fa-instagram text-base"></i> <span id="bride-ig-handle">@sophiarose</span>
+              <i id="bride-ig-icon" class="fa-brands fa-instagram text-base"></i> <span id="bride-ig-handle">@sophiarose</span>
             </a>
           </div>
         </div>
@@ -247,7 +247,7 @@
 
     <!-- FULL-BLEED PHOTO BREAK 1 -->
     <div class="full-bleed reveal">
-      <img src="assets/images/groom.jpg" alt="" loading="lazy" decoding="async">
+      <img src="assets/images/photo1.jpg" alt="" loading="lazy" decoding="async">
       <i class="fa-solid fa-heart divider-icon" aria-hidden="true"></i>
     </div>
 
@@ -385,7 +385,7 @@
 
     <!-- FULL-BLEED PHOTO BREAK 2 -->
     <div class="full-bleed full-bleed--dark reveal">
-      <img src="assets/images/bride.jpg" alt="" loading="lazy" decoding="async">
+      <img src="assets/images/photo2.jpg" alt="" loading="lazy" decoding="async">
       <i class="fa-solid fa-heart divider-icon" aria-hidden="true"></i>
     </div>
 
@@ -494,6 +494,13 @@
         <!-- Photo Rail Dynamic Container (horizontal, drag-to-scroll) -->
         <div class="gallery-rail" id="gallery-container">
           <!-- Dynamically filled by app.js -->
+        </div>
+
+        <!-- View All Photos Button -->
+        <div class="text-center">
+          <button id="view-all-btn" class="gallery-view-all">
+            <i class="fa-solid fa-images"></i> View All Photos
+          </button>
         </div>
       </div>
     </section>

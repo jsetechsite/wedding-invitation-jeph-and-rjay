@@ -82,15 +82,13 @@ function bindWeddingConfig() {
   // Groom Details
   setText("groom-name", cfg.couple.groom.name);
   setText("groom-parents", cfg.couple.groom.parents);
-  setText("groom-ig-handle", cfg.couple.groom.instagram);
-  setAttr("groom-ig", "href", `https://instagram.com/${cfg.couple.groom.instagram.replace('@', '')}`);
+  bindSocialLink("groom", cfg.couple.groom);
   if (cfg.couple.groom.image) setAttr("groom-img", "src", cfg.couple.groom.image);
 
   // Bride Details
   setText("bride-name", cfg.couple.bride.name);
   setText("bride-parents", cfg.couple.bride.parents);
-  setText("bride-ig-handle", cfg.couple.bride.instagram);
-  setAttr("bride-ig", "href", `https://instagram.com/${cfg.couple.bride.instagram.replace('@', '')}`);
+  bindSocialLink("bride", cfg.couple.bride);
   if (cfg.couple.bride.image) setAttr("bride-img", "src", cfg.couple.bride.image);
 
   // Ceremony Event
@@ -133,7 +131,7 @@ function bindWeddingConfig() {
   if (cfg.entourage) renderEntourage(cfg.entourage);
 
   // Footer
-  setText("footer-couple-names", fullCoupleText);
+  setText("footer-couple-names", cfg.couple.thankYou || fullCoupleText);
 }
 
 // Helper utilities for DOM updating
@@ -148,6 +146,26 @@ function setHTML(id, value) {
 function setAttr(id, attr, value) {
   const el = document.getElementById(id);
   if (el && value) el.setAttribute(attr, value);
+}
+
+// Bind a groom/bride social link (facebook or instagram) from config social config
+function bindSocialLink(role, person) {
+  const social = person.social || {
+    platform: "instagram",
+    handle: person.instagram
+  };
+  const icon = document.getElementById(`${role}-ig-icon`);
+  const handleEl = document.getElementById(`${role}-ig-handle`);
+  const link = document.getElementById(`${role}-ig`);
+  if (!link || !social || !social.handle) return;
+
+  const base = social.platform === "facebook" ? "https://facebook.com/" : "https://instagram.com/";
+  link.setAttribute("href", base + social.handle.replace("@", ""));
+  if (handleEl) handleEl.innerText = social.handle;
+  if (icon) {
+    const brand = social.platform === "facebook" ? "fa-facebook" : "fa-instagram";
+    icon.className = `fa-brands ${brand} text-base`;
+  }
 }
 
 /* Render Bank Account Cards */
@@ -288,6 +306,25 @@ function initEnvelopeUnboxing() {
 
   if (!openBtn || !coverScreen) return;
 
+  // Check if returning from gallery - skip envelope
+  if (localStorage.getItem('fromGallery') === 'true') {
+    localStorage.removeItem('fromGallery');
+    const savedY = parseInt(localStorage.getItem('galleryScrollY') || '0', 10);
+    localStorage.removeItem('galleryScrollY');
+    coverScreen.classList.add("opened");
+    setTimeout(() => {
+      const heroReveal = document.querySelector("#hero .reveal");
+      if (heroReveal) heroReveal.classList.add("active");
+      const siteNav = document.getElementById("site-nav");
+      if (siteNav) siteNav.classList.add("visible");
+      window.scrollTo(0, savedY);
+    }, 100);
+    return;
+  }
+
+  // Normal reload - scroll to top
+  window.scrollTo(0, 0);
+
   let proceeding = false;
 
   const startAudio = () => {
@@ -416,6 +453,16 @@ function initGalleryAndLightbox() {
       seeMoreBtn.innerHTML = expanded
         ? '<i class="fa-solid fa-chevron-up"></i> Show Less'
         : '<i class="fa-solid fa-images"></i> See More';
+    });
+  }
+
+  // View All Photos button - navigate to gallery page
+  const viewAllBtn = document.getElementById("view-all-btn");
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener("click", () => {
+      localStorage.setItem('galleryScrollY', window.scrollY);
+      localStorage.setItem('fromGallery', 'true');
+      window.location.href = "gallery.html";
     });
   }
 
@@ -588,6 +635,22 @@ function initScrollReveal() {
         heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
       }
     });
+  }
+
+  // Parallax Scroll Effect on Full-Bleed Photo Breaks
+  const fullBleedImgs = document.querySelectorAll(".full-bleed img");
+  if (fullBleedImgs.length) {
+    window.addEventListener("scroll", () => {
+      const viewportHeight = window.innerHeight;
+      fullBleedImgs.forEach(img => {
+        const rect = img.parentElement.getBoundingClientRect();
+        if (rect.top < viewportHeight + 100 && rect.bottom > -100) {
+          const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+          const yOffset = (progress - 0.5) * 60; // Subtle 0.2x speed effect
+          img.style.transform = `translateY(${yOffset}px)`;
+        }
+      });
+    }, { passive: true });
   }
 }
 

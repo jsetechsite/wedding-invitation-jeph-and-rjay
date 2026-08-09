@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A2238">
+  <meta name="description" content="Wedding Photo Gallery - Rjay & Jeph">
+  <title>Gallery | Wedding Invitation - Rjay & Jeph</title>
+
+  <!-- PWA: iOS standalone support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Wedding Gallery">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+  <link rel="apple-touch-icon" href="assets/images/logo.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="antialiased bg-gray-900 text-white selection:bg-orange-200 selection:text-orange-900">
+
+  <!-- Gallery Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
+      <a href="index.html" class="text-orange-300 hover:text-orange-400 transition text-xl" aria-label="Back to invitation">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <h1 class="font-serif text-xl sm:text-2xl font-bold text-white">Our Gallery</h1>
+    </div>
+  </header>
+
+  <!-- Main Gallery Content -->
+  <main class="pt-20 pb-12 px-4">
+    <div class="max-w-7xl mx-auto">
+      <!-- Gallery Tile Grid -->
+      <div id="gallery-tile-grid" class="gallery-tile-grid">
+        <!-- Dynamically filled by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 px-4 bg-gray-950 border-t border-gray-800 text-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-orange-300 hover:text-orange-400 transition font-serif">
+      <i class="fa-solid fa-arrow-left"></i> Back to Invitation
+    </a>
+  </footer>
+
+  <!-- Lightbox Modal (reused from main page) -->
+  <div id="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
+    <div class="lightbox-content relative max-w-4xl max-h-[85vh] p-4 text-center">
+      <button id="lightbox-close" class="absolute top-6 right-6 text-white text-3xl hover:text-orange-400 transition"
+        aria-label="Close Image Viewer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button id="lightbox-prev" class="lightbox-arrow left" aria-label="Previous image">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button id="lightbox-next" class="lightbox-arrow right" aria-label="Next image">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <img id="lightbox-img" src="" alt="Gallery Image"
+        class="max-h-[75vh] mx-auto rounded-lg shadow-2xl object-contain">
+      <p id="lightbox-caption" class="font-serif text-lg text-orange-200 mt-4"></p>
+    </div>
+  </div>
+
+  <!-- Audio Element (required by app.js) -->
+  <audio id="bg-audio" loop preload="none"></audio>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Initialize gallery tile grid for this page
+    document.addEventListener("DOMContentLoaded", function() {
+      const grid = document.getElementById("gallery-tile-grid");
+      if (!grid || typeof WEDDING_CONFIG === 'undefined' || !WEDDING_CONFIG.gallery) return;
+
+      // Render gallery photos as tiles
+      grid.innerHTML = WEDDING_CONFIG.gallery.map((g, idx) => `
+        <div class="gallery-tile" data-url="${g.url}" data-caption="${g.caption}" data-index="${idx}">
+          <img src="${g.url}" alt="${g.caption}" loading="lazy" decoding="async">
+          <div class="gallery-tile-overlay">
+            <i class="fa-solid fa-expand"></i>
+          </div>
+        </div>
+      `).join('');
+
+      // Initialize lightbox for tiles
+      const items = Array.from(grid.querySelectorAll(".gallery-tile"));
+      const modal = document.getElementById("lightbox-modal");
+      const modalImg = document.getElementById("lightbox-img");
+      const modalCaption = document.getElementById("lightbox-caption");
+      const modalClose = document.getElementById("lightbox-close");
+      const prevBtn = document.getElementById("lightbox-prev");
+      const nextBtn = document.getElementById("lightbox-next");
+      let currentIndex = 0;
+      let _imageTransitioning = false;
+
+      function showImage(index) {
+        if (!items.length || _imageTransitioning) return;
+        const newIndex = (index + items.length) % items.length;
+        const direction = newIndex > currentIndex || (currentIndex === items.length - 1 && newIndex === 0) ? 1 : -1;
+        _imageTransitioning = true;
+
+        modalImg.style.opacity = "0";
+        modalImg.style.transform = `translateX(${-direction * 30}px)`;
+
+        setTimeout(() => {
+          currentIndex = newIndex;
+          const item = items[currentIndex];
+          modalImg.src = item.getAttribute("data-url");
+          modalCaption.textContent = item.getAttribute("data-caption");
+          modalImg.style.transform = `translateX(${direction * 30}px)`;
+          requestAnimationFrame(() => {
+            modalImg.style.opacity = "1";
+            modalImg.style.transform = "translateX(0)";
+          });
+          _imageTransitioning = false;
+        }, 200);
+      }
+
+      function openLightbox(item) {
+        currentIndex = parseInt(item.getAttribute("data-index"), 10) || 0;
+        modalImg.src = item.getAttribute("data-url");
+        modalCaption.textContent = item.getAttribute("data-caption");
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      // Bind click handlers to tiles
+      items.forEach(item => {
+        item.addEventListener("click", () => openLightbox(item));
+      });
+
+      // Bind lightbox controls
+      if (modalClose) modalClose.addEventListener("click", closeLightbox);
+      if (prevBtn) prevBtn.addEventListener("click", () => showImage(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener("click", () => showImage(currentIndex + 1));
+
+      // Close on background click
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeLightbox();
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (!modal.classList.contains("active")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+        if (e.key === "ArrowRight") showImage(currentIndex + 1);
+      });
+    });
+  </script>
+</body>
+</html>
