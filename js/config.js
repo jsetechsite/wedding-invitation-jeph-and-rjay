@@ -122,108 +122,70 @@ const WEDDING_CONFIG = {
     qrCodeImage: "assets/images/rsvp-gift.jpg"
   },
 
-  // Photo Gallery Images
+  // Photo Gallery Images (sorted by capture date)
   gallery: [
-    {
-      url: "assets/images/gallery-1.jpg",
-      caption: "The Journey Begins"
-    },
-    {
-      url: "assets/images/gallery-2.jpg",
-      caption: "Moments to Cherish"
-    },
-    {
-      url: "assets/images/gallery-3.jpg",
-      caption: "A Lifetime of Love"
-    },
-    {
-      url: "assets/images/gallery-4.jpg",
-      caption: "Hand in Hand"
-    },
-    {
-      url: "assets/images/gallery-5.jpg",
-      caption: "Together Forever"
-    },
-    {
-      url: "assets/images/gallery-6.jpg",
-      caption: "Our Happy Place"
-    },
-    {
-      url: "assets/images/gallery-7.jpg",
-      caption: "Love Laughs"
-    },
-    {
-      url: "assets/images/gallery-8.jpg",
-      caption: "Written in the Stars"
-    },
-    {
-      url: "assets/images/gallery-9.jpg",
-      caption: "Cherished Moments"
-    },
-    {
-      url: "assets/images/gallery-10.jpg",
-      caption: "Better Together"
-    },
-    {
-      url: "assets/images/gallery-11.jpg",
-      caption: "Always & Forever"
-    },
-    {
-      url: "assets/images/gallery-12.jpg",
-      caption: "Meant to Be"
-    },
-    {
-      url: "assets/images/gallery-13.jpg",
-      caption: "Endless Love"
-    },
-    {
-      url: "assets/images/gallery-14.jpg",
-      caption: "Happily Ever After"
-    },
-    {
-      url: "assets/images/gallery-15.jpg",
-      caption: "Two Souls, One Heart"
-    },
-    {
-      url: "assets/images/gallery-16.jpg",
-      caption: "Our Love Story"
-    },
-    {
-      url: "assets/images/gallery-17.jpg",
-      caption: "A Beautiful Moment"
-    },
-    {
-      url: "assets/images/gallery-18.jpg",
-      caption: "Love in the Air"
-    },
-    {
-      url: "assets/images/gallery-19.jpg",
-      caption: "Forever Yours"
-    },
-    {
-      url: "assets/images/gallery-20.jpg",
-      caption: "Heartfelt Joy"
-    },
-    {
-      url: "assets/images/gallery-21.jpg",
-      caption: "Eternal Bliss"
-    },
-    {
-      url: "assets/images/gallery-22.jpg",
-      caption: "Sweet Memories"
-    },
-    {
-      url: "assets/images/gallery-23.jpg",
-      caption: "Together Always"
-    },
-    {
-      url: "assets/images/gallery-24.jpg",
-      caption: "Our Special Day"
-    },
-    {
-      url: "assets/images/gallery-25.jpg",
-      caption: "Love Never Fades"
-    }
+    // Aug 4
+    { url: "assets/images/gallery-7.jpg", caption: "Love Laughs" },
+    { url: "assets/images/wd-photo3.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-1.jpg", caption: "The Journey Begins" },
+    { url: "assets/images/wd-photo4.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-3.jpg", caption: "A Lifetime of Love" },
+    { url: "assets/images/wd-photo5.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-photo6.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-2.jpg", caption: "Moments to Cherish" },
+    { url: "assets/images/wd-photo7.jpg", caption: "Wedding Detail" },
+    // Aug 6
+    { url: "assets/images/wd-photo8.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-5.jpg", caption: "Together Forever" },
+    { url: "assets/images/wd-photo9.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-6.jpg", caption: "Our Happy Place" },
+    { url: "assets/images/gallery-4.jpg", caption: "Hand in Hand" },
+    { url: "assets/images/wd-photo10.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-photo11.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-8.jpg", caption: "Written in the Stars" },
+    { url: "assets/images/wd-photo12.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-9.jpg", caption: "Cherished Moments" },
+    { url: "assets/images/wd-photo13.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-10.jpg", caption: "Better Together" },
+    { url: "assets/images/wd-photo15.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-11.jpg", caption: "Always & Forever" },
+    { url: "assets/images/wd-photo16.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-12.jpg", caption: "Meant to Be" },
+    { url: "assets/images/wd-photo17.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-13.jpg", caption: "Endless Love" },
+    { url: "assets/images/wd-photo18.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-14.jpg", caption: "Happily Ever After" },
+    { url: "assets/images/wd-photo19.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-15.jpg", caption: "Two Souls, One Heart" },
+    { url: "assets/images/wd-photo20.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-16.jpg", caption: "Our Love Story" },
+    // Aug 9
+    { url: "assets/images/wd-cac3b471-e416-4c57-8b66-f9b9ce4ed7c3.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-22.jpg", caption: "Sweet Memories" },
+    { url: "assets/images/wd-eadb24cb-fa31-4768-8f5b-4f913e59bf2b.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-19.jpg", caption: "Forever Yours" },
+    { url: "assets/images/wd-efdeed84-8bc4-4d8c-a546-87086fc985bb.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-b687cf03-fe26-4972-92c5-26ff5af2d847.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-d6a92739-c71d-4a72-ac78-20641c31387e.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-f11503e6-8fcb-46c7-bcd9-e22eed9b6447.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-20.jpg", caption: "Heartfelt Joy" },
+    { url: "assets/images/wd-11f3636a-a7f3-4574-a7ab-d203db4773ae.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-21.jpg", caption: "Eternal Bliss" },
+    { url: "assets/images/wd-c6e08cb2-e2c4-4032-ac64-75c46f88a083.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-23.jpg", caption: "Together Always" },
+    { url: "assets/images/wd-79266957-279a-4867-8263-f98545adc926.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-25.jpg", caption: "Love Never Fades" },
+    { url: "assets/images/gallery-24.jpg", caption: "Our Special Day" },
+    { url: "assets/images/wd-3ad3f375-1428-4437-98ee-43d325c9ebab.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-de49ec15-e711-49c1-958a-0fa6ca18ec51.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-13eca37c-60ea-4e5a-b0af-faf6f85d6a82.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-db93ecab-f774-44b1-80f9-53676a2a3485.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-5ae48852-2a3a-4064-ac7d-a1e0a7f72bbf.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/gallery-17.jpg", caption: "A Beautiful Moment" },
+    { url: "assets/images/gallery-18.jpg", caption: "Love in the Air" },
+    { url: "assets/images/wd-12996556-52c8-4edb-bdec-4dc55cd731d1.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-adb8ec41-cd67-4507-a7af-bfba2cdff428.jpg", caption: "Wedding Detail" },
+    { url: "assets/images/wd-ddd984b8-847d-454e-be06-85c2aba8b3fe.jpg", caption: "Wedding Detail" }
   ],
 
   // Background Audio Configuration
