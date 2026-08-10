@@ -462,7 +462,7 @@ function initGalleryAndLightbox() {
     viewAllBtn.addEventListener("click", () => {
       localStorage.setItem('galleryScrollY', window.scrollY);
       localStorage.setItem('fromGallery', 'true');
-      window.location.href = "gallery.html";
+      window.location.href = "gallery";
     });
   }
 
