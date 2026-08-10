@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wedding-invitation-v50';
+const CACHE_NAME = 'wedding-invitation-v49';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -112,10 +112,16 @@ self.addEventListener('fetch', (event) => {
         });
         return networkResponse;
       }).catch(() => {
-        // Fallback for HTML navigation
+        // Never leave respondWith(undefined) — that surfaces as net::ERR_FAILED.
         if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('./index.html');
+          return caches.match('./index.html').then((cachedHome) =>
+            cachedHome || new Response('<h1>Offline</h1>', {
+              status: 503,
+              headers: { 'Content-Type': 'text/html' }
+            })
+          );
         }
+        return new Response(null, { status: 404 });
       });
     })
   );
