@@ -324,11 +324,12 @@ body {
 }
 
 .env-couple {
-  font-size: clamp(2rem, 9vw, 2.9rem);
+  font-size: clamp(2.4rem, 11vw, 3.4rem);
   color: var(--color-cream);
-  font-weight: 700;
+  font-weight: 400;
   margin: 0.9rem 0 0.4rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
 }
 
 .env-divider {

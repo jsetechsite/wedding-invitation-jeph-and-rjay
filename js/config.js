@@ -99,7 +99,7 @@ const WEDDING_CONFIG = {
 
   // Google Form RSVP Link
   rsvp: {
-    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe-placeholder/viewform",
+    googleFormUrl: "https://docs.google.com/forms/u/1/d/e/1FAIpQLSdn8XPeTZjzTw265ydoxKSvDuo7_gtQ00h2PuAbhjoHPOd0dQ/viewform?usp=publish-editorhttps://docs.google.com/forms/d/e/1FAIpQLSdn8XPeTZjzTw265ydoxKSvDuo7_gtQ00h2PuAbhjoHPOd0dQ/viewform",
     message: "We have reserved a seat for you. Unfortunately due to guest count, we won't be able to extend the invitation to your plus ones. We hope to share this once-in-a-lifetime moment with you. Please reply on or before November 18, 2026."
   },
 
