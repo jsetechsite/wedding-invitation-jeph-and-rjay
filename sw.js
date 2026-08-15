@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wedding-invitation-v56';
+const CACHE_NAME = 'wedding-invitation-v55';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -51,7 +51,7 @@ const ASSETS_TO_CACHE = [
   './assets/images/wd-adb8ec41-cd67-4507-a7af-bfba2cdff428.jpg',
   './assets/images/wd-efdeed84-8bc4-4d8c-a546-87086fc985bb.jpg',
   './assets/images/wd-13eca37c-60ea-4e5a-b0af-faf6f85d6a82.jpg',
-  './assets/images/attire.jpg',
+  './assets/images/attire2.jpg',
   './assets/images/rsvp-gift.jpg',
   './assets/audio/wedding-ambient.mp3'
 ];
