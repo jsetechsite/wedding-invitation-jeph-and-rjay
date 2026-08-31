@@ -13,7 +13,7 @@ const WEDDING_CONFIG = {
       name: "Rjay Aranel",
       shortName: "Rjay",
       parents: "Son of Mr. Henry M. Aranel & Mrs. Ma. Salve A. Aranel +",
-      social: { platform: "facebook", handle: "@rjay.lenara" },
+      social: { platform: "facebook", handle: "@rj.lenara" },
       image: "assets/images/groom.jpg"
     },
     bride: {
